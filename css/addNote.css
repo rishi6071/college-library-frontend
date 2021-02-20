@@ -4,8 +4,6 @@
 #addNote_box {
     box-shadow: 0px 0px 4px rgba(128, 128, 128, 0.8);
     padding: 25px 20px;
-    margin-left: 10px !important;
-    margin-right: 10px !important;
 }
 
 #addNote_box label {
