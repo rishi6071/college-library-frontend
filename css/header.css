@@ -30,10 +30,10 @@
   margin-left: 15px;
 }
 
-/* Search Form in Navbar */
+/***** Search Form in Navbar */
 
 .navbar input,
-.navbar .btn {
+.btn {
   border-radius: 0 !important;
   border: 1px solid #37474f;
 }
@@ -46,13 +46,13 @@
   width: 400px;
 }
 
-.navbar .btn {
+.btn {
   text-transform: uppercase;
   letter-spacing: 1px;
   color: #37474f;
 }
 
-.navbar .btn:hover {
+.btn:hover {
     background-color: #37474f;
     color: white;
 }
