@@ -2,8 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
 
 #addNote_box {
-    box-shadow: 0px 0px 3px rgba(128, 128, 128, 0.8);
+    box-shadow: 0px 0px 4px rgba(128, 128, 128, 0.8);
     padding: 25px 20px;
+    margin-left: 10px !important;
+    margin-right: 10px !important;
 }
 
 #addNote_box label {
@@ -14,7 +16,7 @@
 }
 
 #addNote_box .form-check label {
-    color: rgba(0, 0, 0, 0.7);
+    color: rgba(0, 0, 0, 0.6);
     font: smaller;
 }
 
