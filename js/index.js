@@ -45,10 +45,26 @@ const addBook = () => {
     let book_id = document.querySelector('#bookId').value;
     let book_title = document.querySelector('#bookTitle').value.trim();
     let book_author = document.querySelector('#bookAuthor').value.trim();
-    let book_genre = document.querySelector('input[name="bookGenre"]:checked').value;
 
-    if (book_id == '' || book_title == '' || book_author == '' || book_genre == '')
+    let book_genre;
+    try {
+        book_genre = document.querySelector('input[name="bookGenre"]:checked').value;
+    }
+    catch(message) {
+        // Nothing
+    }
+
+    console.log(book_genre);
+    if (book_id == '' || book_title == '' || book_author == '' || book_genre == undefined) {
+        // #f8d7da
+        showStatus("Warning", "Empty/Wrong Value", "#fff3cd");
+        setTimeout(removeStatus, 2500);
         return false;
+    }
+    else {
+        showStatus("Success", "Book has been Added", "#d1e7dd");        
+        setTimeout(removeStatus, 2500);
+    }
 
     // Creating the Book Object
     const book = new Book(book_id, book_title, book_author, book_genre);
@@ -61,76 +77,16 @@ const addBook = () => {
 }
 
 
+const showStatus = (status, message, color) => {
+    const status_box = document.querySelector('#statusMessage');
+    status_box.innerHTML = `<div class="container toast_box me-auto" style="background-color: ${color}">
+                                <strong>${status}!</strong> 
+                                <span class="ms-1">${message}</span>
+                                <button type="button" onclick="removeStatus()" class="btn-close" aria-label="Close"></button>
+                            </div>`;
+}
 
-{/* <form action="#" method="POST" name="addBookForm">
-    <div class="form-group">
-        <div class="row">
-            <div class="col-lg-3 col-md-4 d-flex align-items-center">
-                <label for="bookId">Book ID</label>
-            </div>
-            <div class="col-lg-9 col-md-8">
-                <input type="number" class="form-control" id="bookId" name="bookId" placeholder="4-Digit Book ID..." />
-            </div>
-        </div>
-    </div>
-
-    <div class="form-group mt-3">
-        <div class="row">
-            <div class="col-lg-3 col-md-4 d-flex align-items-center">
-                <label for="bookTitle">Title</label>
-            </div>
-            <div class="col-lg-9 col-md-8">
-                <input type="text" class="form-control" id="bookTitle" name="bookTitle" />
-            </div>
-        </div>
-    </div>
-
-    <div class="form-group mt-3">
-        <div class="row">
-            <div class="col-lg-3 col-md-4 d-flex align-items-center">
-                <label for="bookAuthor">Author</label>
-            </div>
-            <div class="col-lg-9 col-md-8">
-                <input type="text" class="form-control" id="bookAuthor" name="bookAuthor" />
-            </div>
-        </div>
-    </div>
-
-    <div class="form-group mt-3">
-        <div class="row">
-            <div class="col-lg-3 col-md-4">
-                <label for="bookGenre">Genre</label>
-            </div>
-            <div class="col-lg-9 col-md-8">
-                <div class="form-check">
-                    <input type="radio" class="form-check-input" name="bookGenre" id="genreFiction"
-                        value="fiction" />
-                    <label for="genreFiction" class="form-check-label">Fiction</label>
-                </div>
-
-                <div class="form-check">
-                    <input type="radio" class="form-check-input" name="bookGenre"
-                        id="genreProgramming" value="fiction" checked />
-                    <label for="genreProgramming" class="form-check-label">Computer
-                                                                Programming</label>
-                </div>
-
-                <div class="form-check">
-                    <input type="radio" class="form-check-input" name="bookGenre" id="genreCooking"
-                        value="programming" />
-                    <label for="genreCooking" class="form-check-label">Cooking</label>
-                </div>
-
-                <div class="form-check">
-                    <input type="radio" class="form-check-input" name="bookGenre"
-                        id="genreTravelling" value="travelling" />
-                    <label for="genreTravelling" class="form-check-label">Travelling</label>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="form-group mt-3">
-        <input type="submit" class="btn px-4 addBookBtn" id="addBook_btn" value="Add Book" />
-    </div>
-</form> */}
+const removeStatus = () => {
+    const status_box = document.querySelector('#statusMessage');
+    status_box.innerHTML = '';
+}
