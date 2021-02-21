@@ -22,7 +22,7 @@
 
 </head>
 
-<body>
+<body onload="renderAddNoteForm()">
     <!-- || Header Start -->
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
@@ -57,67 +57,7 @@
         <div class="container">
             <div class="row mt-3">
                 <div class="col-md-8 col-sm-10 col-12 offset-md-2 offset-sm-1" id="addNote_box">
-                    <form action="#" method="POST" name="addNoteForm">
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-lg-3 col-md-4 d-flex align-items-center">
-                                    <label for="bookName">Name of Book</label>
-                                </div>
-                                <div class="col-lg-9 col-md-8">
-                                    <input type="text" class="form-control" id="bookName" name="bookName" />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group mt-3">
-                            <div class="row">
-                                <div class="col-lg-3 col-md-4 d-flex align-items-center">
-                                    <label for="bookAuthor">Author</label>
-                                </div>
-                                <div class="col-lg-9 col-md-8">
-                                    <input type="text" class="form-control" id="bookAuthor" name="bookAuthor" />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group mt-3">
-                            <div class="row">
-                                <div class="col-lg-3 col-md-4">
-                                    <label for="bookGenre">Genre</label>
-                                </div>
-                                <div class="col-lg-9 col-md-8">
-                                    <div class="form-check">
-                                        <input type="radio" class="form-check-input" name="bookGenre" id="genreFiction"
-                                            value="fiction" />
-                                        <label for="genreFiction" class="form-check-label">Fiction</label>
-                                    </div>
-
-                                    <div class="form-check">
-                                        <input type="radio" class="form-check-input" name="bookGenre"
-                                            id="genreProgramming" value="fiction" checked />
-                                        <label for="genreProgramming" class="form-check-label">Computer
-                                            Programming</label>
-                                    </div>
-
-                                    <div class="form-check">
-                                        <input type="radio" class="form-check-input" name="bookGenre" id="genreCooking"
-                                            value="programming" />
-                                        <label for="genreCooking" class="form-check-label">Cooking</label>
-                                    </div>
-
-                                    <div class="form-check">
-                                        <input type="radio" class="form-check-input" name="bookGenre"
-                                            id="genreTravelling" value="travelling" />
-                                        <label for="genreTravelling" class="form-check-label">Travelling</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group mt-3">
-                            <input type="submit" class="btn px-4 addNoteBtn" id="addnote_btn" value="Add Note" />
-                        </div>
-                    </form>
+                    
                 </div>
             </div>
         </div>
@@ -159,6 +99,7 @@
         </div>
     </main>
     <!-- || Your Books Start -->
+
 
     <!-- In-Built JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
