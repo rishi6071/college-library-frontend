@@ -38,6 +38,22 @@ Display.prototype.clear = function () {
     libraryForm.reset();
 }
 
+// Show Status Toast Message
+Display.prototype.showStatus = function(status, message, color) {
+    const status_box = document.querySelector('#statusMessage');
+    status_box.innerHTML = `<div class="container toast_box me-auto" style="background-color: ${color}">
+                                <strong>${status}!</strong> 
+                                <span class="ms-2">${message}.</span>
+                                <button type="button" onclick="removeStatus()" class="btn-close" aria-label="Close"></button>
+                            </div>`;
+}
+
+// Remove Status Toast Message
+Display.prototype.removeStatus = function() {
+    const status_box = document.querySelector('#statusMessage');
+    status_box.innerHTML = '';
+}
+
 
 // Will call when the "Add Book" button is clicked
 const addBook = () => {
@@ -54,39 +70,21 @@ const addBook = () => {
         // Nothing
     }
 
-    console.log(book_genre);
-    if (book_id == '' || book_title == '' || book_author == '' || book_genre == undefined) {
-        // #f8d7da
-        showStatus("Warning", "Empty/Wrong Value", "#fff3cd");
-        setTimeout(removeStatus, 2500);
+    const displayBook = new Display();
+
+    if (book_id == '' || book_title.length<2 || book_author.length<2 || book_genre == undefined) {
+        displayBook.showStatus("Warning", "Empty/Wrong Value", "#fff3cd");
+        setTimeout(displayBook.removeStatus, 2500);
         return false;
     }
     else {
-        showStatus("Success", "Book has been Added", "#d1e7dd");        
-        setTimeout(removeStatus, 2500);
+        displayBook.showStatus("Success", "Book has been Added", "#d1e7dd");        
+        setTimeout(displayBook.removeStatus, 2500);
     }
 
-    // Creating the Book Object
     const book = new Book(book_id, book_title, book_author, book_genre);
-    console.log(book);
+    console.log(displayBook);
 
-    // Displaying the Book object
-    const displayBook = new Display();
     displayBook.add(book);
     displayBook.clear();
-}
-
-
-const showStatus = (status, message, color) => {
-    const status_box = document.querySelector('#statusMessage');
-    status_box.innerHTML = `<div class="container toast_box me-auto" style="background-color: ${color}">
-                                <strong>${status}!</strong> 
-                                <span class="ms-1">${message}</span>
-                                <button type="button" onclick="removeStatus()" class="btn-close" aria-label="Close"></button>
-                            </div>`;
-}
-
-const removeStatus = () => {
-    const status_box = document.querySelector('#statusMessage');
-    status_box.innerHTML = '';
 }
