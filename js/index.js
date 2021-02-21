@@ -1,40 +1,69 @@
-// Dynamically Rendering AddNote Form
-const renderAddNoteForm = () => {
+// Dynamically Rendering AddBook Form
+const renderAddBookForm = () => {
 
-    const addNote_box = document.querySelector('#addNote_box');
+    const addBook_box = document.querySelector('#addBook_box');
 
     const form = document.createElement('form');
     form.action = "#";
     form.method = "POST";
-    form.name = "addNoteForm";
+    form.name = "addBookForm";
 
-    // --> Name of Book
-    const bookNameGroup = document.createElement('div');
-    bookNameGroup.className = "form-group";
+    // --> Book ID
+    const bookIdGroup = document.createElement('div');
+    bookIdGroup.className = "form-group";
 
-    const bookNameRow = document.createElement('div');
-    bookNameRow.className = "row";
+    const bookIdRow = document.createElement('div');
+    bookIdRow.className = "row";
 
-    const bookNameLabelCol = document.createElement('div');
-    bookNameLabelCol.className = "col-lg-3 col-md-4 d-flex align-items-center";
+    const bookIdLabelCol = document.createElement('div');
+    bookIdLabelCol.className = "col-lg-3 col-md-4 d-flex align-items-center";
 
-    const bookNameLabel = document.createElement('label');
-    bookNameLabel.setAttribute('for', 'bookName');
-    bookNameLabel.innerText = "Name of Book";
-    bookNameLabelCol.appendChild(bookNameLabel);
+    const bookIdLabel = document.createElement('label');
+    bookIdLabel.setAttribute('for', 'bookId');
+    bookIdLabel.innerText = "Book ID";
+    bookIdLabelCol.appendChild(bookIdLabel);
 
-    const bookNameInputCol = document.createElement('div');
-    bookNameInputCol.className = "col-lg-9 col-md-8";
+    const bookIdInputCol = document.createElement('div');
+    bookIdInputCol.className = "col-lg-9 col-md-8";
 
-    const bookNameInput = document.createElement('input');
-    bookNameInput.type = "text";
-    bookNameInput.className = "form-control";
-    bookNameInput.id = "bookName";
-    bookNameInput.name = "bookName";
-    bookNameInputCol.appendChild(bookNameInput);
+    const bookIdInput = document.createElement('input');
+    bookIdInput.type = "number";
+    bookIdInput.className = "form-control";
+    bookIdInput.id = "bookId";
+    bookIdInput.name = "bookId";
+    bookIdInput.placeholder = "4-Digit Book ID...";
+    bookIdInputCol.appendChild(bookIdInput);
 
-    bookNameRow.append(bookNameLabelCol, bookNameInputCol);
-    bookNameGroup.appendChild(bookNameRow);
+    bookIdRow.append(bookIdLabelCol, bookIdInputCol);
+    bookIdGroup.appendChild(bookIdRow);
+
+    // --> Title of Book
+    const bookTitleGroup = document.createElement('div');
+    bookTitleGroup.className = "form-group mt-3";
+
+    const bookTitleRow = document.createElement('div');
+    bookTitleRow.className = "row";
+
+    const bookTitleLabelCol = document.createElement('div');
+    bookTitleLabelCol.className = "col-lg-3 col-md-4 d-flex align-items-center";
+
+    const bookTitleLabel = document.createElement('label');
+    bookTitleLabel.setAttribute('for', 'bookTitle');
+    bookTitleLabel.innerText = "Title";
+    bookTitleLabelCol.appendChild(bookTitleLabel);
+
+    const bookTitleInputCol = document.createElement('div');
+    bookTitleInputCol.className = "col-lg-9 col-md-8";
+
+    const bookTitleInput = document.createElement('input');
+    bookTitleInput.type = "text";
+    bookTitleInput.className = "form-control";
+    bookTitleInput.id = "bookTitle";
+    bookTitleInput.name = "bookTitle";
+    bookTitleInputCol.appendChild(bookTitleInput);
+
+    bookTitleRow.append(bookTitleLabelCol, bookTitleInputCol);
+    bookTitleGroup.appendChild(bookTitleRow);
 
     // --> Name of Author
     const bookAuthorGroup = document.createElement('div');
@@ -94,7 +123,7 @@ const renderAddNoteForm = () => {
         genreInput.className = "form-check-input";
         genreInput.name = "bookGenre";
         genreInput.id = "genre" + genre;
-        genreInput.value = genre.toLowerCase();
+        genreInput.value = genre;
 
         const genreLabel = document.createElement('label');
         genreLabel.setAttribute('for', 'genre' + genre);
@@ -109,36 +138,92 @@ const renderAddNoteForm = () => {
     bookGenreGroup.appendChild(bookGenreRow);
 
     // --> Add Note Button
-    const addNoteBtnGroup = document.createElement('div');
-    addNoteBtnGroup.className = "form-group mt-3";
+    const addBookBtnGroup = document.createElement('div');
+    addBookBtnGroup.className = "form-group mt-3";
 
-    const addNoteBtn = document.createElement('input');
-    addNoteBtn.type = "submit";
-    addNoteBtn.className = "btn px-4 addNoteBtn";
-    addNoteBtn.id = "addnote_btn";
-    addNoteBtn.addEventListener('click', (event) => {
+    const addBookBtn = document.createElement('input');
+    addBookBtn.type = "submit";
+    addBookBtn.className = "btn px-4 addBookBtn";
+    addBookBtn.id = "addBook_btn";
+    addBookBtn.addEventListener('click', (event) => {
         event.preventDefault();
-        addNote();
+        addBook();
     });
-    addNoteBtn.value = "Add Note";
+    addBookBtn.value = "Add Book";
+    addBookBtnGroup.appendChild(addBookBtn);
 
-    addNoteBtnGroup.appendChild(addNoteBtn);
-
-    form.append(bookNameGroup, bookAuthorGroup, bookGenreGroup, addNoteBtnGroup);
-    addNote_box.appendChild(form);
+    form.append(bookIdGroup, bookTitleGroup, bookAuthorGroup, bookGenreGroup, addBookBtnGroup);
+    addBook_box.appendChild(form);
 }
 
-const addNote = () => {
+
+// Template for a Book
+function Book(id, title, author, genre) {
+    this.id = id;
+    this.title = title;
+    this.author = author;
+    this.genre = genre;
 }
 
-{/* <form action="#" method="POST" name="addNoteForm">
+// Display Constructor
+function Display() {
+
+}
+
+
+// Add methods to Display prototype
+
+
+const addBook = () => {
+    // Input values by User
+    let book_id = document.querySelector('#bookId').value;
+    let book_title = document.querySelector('#bookTitle').value.trim();
+    let book_author = document.querySelector('#bookAuthor').value.trim();
+    let book_genre = document.querySelector('input[name="bookGenre"]:checked').value;
+
+    if(book_id == '' || book_title == '' || book_author == '' || book_genre == '')
+        return false;
+
+    const library_books_list = document.querySelector('#library_books_list');
+
+    const bookRow = document.createElement('tr');
+    const bookID = document.createElement('th');
+    bookID.scope = "row";
+    bookID.innerText = book_id;
+    
+    const bookTitle = document.createElement('td');
+    bookTitle.innerText = book_title;
+
+    const bookAuthor = document.createElement('td');
+    bookAuthor.innerText = book_author;
+
+    const bookGenre = document.createElement('td');
+    bookGenre.innerText = '@' + book_genre;
+
+    bookRow.append(bookID, bookTitle, bookAuthor, bookGenre);
+    library_books_list.appendChild(bookRow);
+}
+
+
+{/* <form action="#" method="POST" name="addBookForm">
     <div class="form-group">
         <div class="row">
             <div class="col-lg-3 col-md-4 d-flex align-items-center">
-                <label for="bookName">Name of Book</label>
+                <label for="bookId">Book ID</label>
             </div>
             <div class="col-lg-9 col-md-8">
-                <input type="text" class="form-control" id="bookName" name="bookName" />
+                <input type="number" class="form-control" id="bookId" name="bookId" placeholder="4-Digit Book ID..." />
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group mt-3">
+        <div class="row">
+            <div class="col-lg-3 col-md-4 d-flex align-items-center">
+                <label for="bookTitle">Title</label>
+            </div>
+            <div class="col-lg-9 col-md-8">
+                <input type="text" class="form-control" id="bookTitle" name="bookTitle" />
             </div>
         </div>
     </div>
@@ -170,7 +255,7 @@ const addNote = () => {
                     <input type="radio" class="form-check-input" name="bookGenre"
                         id="genreProgramming" value="fiction" checked />
                     <label for="genreProgramming" class="form-check-label">Computer
-                                            Programming</label>
+                                                                Programming</label>
                 </div>
 
                 <div class="form-check">
@@ -189,6 +274,6 @@ const addNote = () => {
     </div>
 
     <div class="form-group mt-3">
-        <input type="submit" class="btn px-4 addNoteBtn" id="addnote_btn" value="Add Note" />
+        <input type="submit" class="btn px-4 addBookBtn" id="addBook_btn" value="Add Book" />
     </div>
 </form> */}

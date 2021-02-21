@@ -17,16 +17,16 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="./css/header.css" />
-    <link rel="stylesheet" href="./css/addNote.css" />
+    <link rel="stylesheet" href="./css/addBook.css" />
     <link rel="stylesheet" href="./css/booklist.css" />
 
 </head>
 
-<body onload="renderAddNoteForm()">
+<body onload="renderAddBookForm()">
     <!-- || Header Start -->
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand pt-2" href="#">
                 <img src="./img/logo.png" alt="College Library" /> <span>Rishi Library</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -45,8 +45,9 @@
     </nav>
     <!-- || Header End -->
 
-<!-- 
-    <div class="alert alert-dark alert-dismissible fade show" role="alert">
+
+    <!-- Alert Message -->
+    <!-- <div class="alert alert-success alert-dismissible fade show rounded-0" role="alert">
         <strong>Holy guacamole!</strong> You should check in on some of those fields below.
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div> -->
@@ -56,8 +57,8 @@
     <section>
         <div class="container">
             <div class="row mt-3">
-                <div class="col-md-8 col-sm-10 col-12 offset-md-2 offset-sm-1" id="addNote_box">
-                    
+                <div class="col-md-8 col-sm-10 col-12 offset-md-2 offset-sm-1" id="addBook_box">
+                    <!-- Dynamically Rendering the Add Note Form -->
                 </div>
             </div>
         </div>
@@ -84,7 +85,7 @@
                                     <th scope="col">Genre</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="library_books_list">
                                 <tr>
                                     <th scope="row">1</th>
                                     <td>Mark</td>
