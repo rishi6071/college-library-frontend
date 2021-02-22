@@ -4,8 +4,8 @@ let booklist = [];
 // Rendering Stored Library Book onload
 const renderStoredBooks = () => {
     let display = new Display();
-    
-    if(localStorage.getItem('booklist') == null)
+
+    if (localStorage.getItem('booklist') == null)
         localStorage.setItem('booklist', JSON.stringify([]));
 
     booklist = JSON.parse(localStorage.getItem('booklist'));
@@ -54,7 +54,7 @@ Display.prototype.clear = function () {
 }
 
 // Show Status Toast Message
-Display.prototype.showStatus = function(status, message, color) {
+Display.prototype.showStatus = function (status, message, color) {
     const status_box = document.querySelector('#statusMessage');
     status_box.innerHTML = `<div class="container toast_box me-auto" style="background-color: ${color}">
                                 <strong>${status}!</strong> 
@@ -64,7 +64,7 @@ Display.prototype.showStatus = function(status, message, color) {
 }
 
 // Remove Status Toast Message
-Display.prototype.removeStatus = function() {
+Display.prototype.removeStatus = function () {
     const status_box = document.querySelector('#statusMessage');
     status_box.innerHTML = '';
 }
@@ -81,20 +81,33 @@ const addBook = () => {
     try {
         book_genre = document.querySelector('input[name="bookGenre"]:checked').value;
     }
-    catch(message) {
+    catch (message) {
         // Nothing
     }
 
     const displayBook = new Display();
-    if (book_id.length<4 || book_id.length>4 || book_title.length<3 || book_author.length<3 || book_genre == undefined) {
+    if (book_id.length < 4 || book_id.length > 4 || book_title.length < 3 || book_author.length < 3 || book_genre == undefined) {
         displayBook.showStatus("Warning", "Empty/Wrong Value", "#fff3cd");
         setTimeout(displayBook.removeStatus, 2500);
         return false;
     }
     else {
-        displayBook.showStatus("Success", "Book has been Added", "#d1e7dd");        
+        displayBook.showStatus("Success", "Book has been Added", "#d1e7dd");
         setTimeout(displayBook.removeStatus, 2500);
     }
+
+    // Checking if book_id already exist
+    let flag = 1;
+    JSON.parse(localStorage.getItem('booklist')).forEach((book, index, booklist) => {
+        if (book.id == book_id) {
+            displayBook.showStatus("Error", "Book-ID Already Exists", "#f8d7da");
+            setTimeout(displayBook.removeStatus, 2500);
+            flag = 2;
+            return false;
+        }
+    });
+    if(flag != 1) 
+        return false;
 
     const book = new Book(book_id, book_title, book_author, book_genre);
     booklist.push(book);
