@@ -59,7 +59,7 @@ Display.prototype.showStatus = function (status, message, color) {
     status_box.innerHTML = `<div class="container toast_box me-auto" style="background-color: ${color}">
                                 <strong>${status}!</strong> 
                                 <span class="ms-2">${message}.</span>
-                                <button type="button" onclick="removeStatus()" class="btn-close" aria-label="Close"></button>
+                                <button type="button" onclick="removeStatus()" class="btn-close ripple" aria-label="Close"></button>
                             </div>`;
 }
 

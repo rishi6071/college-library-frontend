@@ -5,6 +5,7 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  outline: none;
 }
 
 .navbar {
@@ -92,7 +93,7 @@
 }
 
 .clear_list img {
-  width: 30px;
+  width: 27px;
   height: auto;
   margin-top: -3.5px;
   margin-left: 20px;

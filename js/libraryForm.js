@@ -150,7 +150,7 @@ const renderAddBookForm = () => {
 
     const addBookBtn = document.createElement('input');
     addBookBtn.type = "submit";
-    addBookBtn.className = "btn px-4 addBookBtn";
+    addBookBtn.className = "btn px-4 ripple addBookBtn";
     addBookBtn.id = "addBook_btn";
     addBookBtn.addEventListener('click', (event) => {
         event.preventDefault();
