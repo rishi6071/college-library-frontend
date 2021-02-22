@@ -7,6 +7,7 @@ const renderAddBookForm = () => {
     form.action = "#";
     form.method = "POST";
     form.name = "addBookForm";
+    form.autocomplete = "off";
 
     // --> Book ID
     const bookIdGroup = document.createElement('div');
@@ -16,7 +17,7 @@ const renderAddBookForm = () => {
     bookIdRow.className = "row";
 
     const bookIdLabelCol = document.createElement('div');
-    bookIdLabelCol.className = "col-lg-3 col-md-4 d-flex align-items-center";
+    bookIdLabelCol.className = "col-lg-3 col-md-4";
 
     const bookIdLabel = document.createElement('label');
     bookIdLabel.setAttribute('for', 'bookId');
@@ -31,8 +32,12 @@ const renderAddBookForm = () => {
     bookIdInput.className = "form-control";
     bookIdInput.id = "bookId";
     bookIdInput.name = "bookId";
+    bookIdInput.minLength = 4;
+    bookIdInput.maxLength = 4;
     bookIdInput.placeholder = "4-Digit Book ID...";
-    bookIdInputCol.appendChild(bookIdInput);
+    bookIdInput.addEventListener('focus', addValidateNote);
+    bookIdInput.addEventListener('blur', removeValidateNote);
+    bookIdInputCol.append(bookIdInput);
 
     bookIdRow.append(bookIdLabelCol, bookIdInputCol);
     bookIdGroup.appendChild(bookIdRow);
@@ -45,7 +50,7 @@ const renderAddBookForm = () => {
     bookTitleRow.className = "row";
 
     const bookTitleLabelCol = document.createElement('div');
-    bookTitleLabelCol.className = "col-lg-3 col-md-4 d-flex align-items-center";
+    bookTitleLabelCol.className = "col-lg-3 col-md-4";
 
     const bookTitleLabel = document.createElement('label');
     bookTitleLabel.setAttribute('for', 'bookTitle');
@@ -60,7 +65,9 @@ const renderAddBookForm = () => {
     bookTitleInput.className = "form-control";
     bookTitleInput.id = "bookTitle";
     bookTitleInput.name = "bookTitle";
-    bookTitleInputCol.appendChild(bookTitleInput);
+    bookTitleInput.addEventListener('focus', addValidateNote);
+    bookTitleInput.addEventListener('blur', removeValidateNote);
+    bookTitleInputCol.append(bookTitleInput);
 
     bookTitleRow.append(bookTitleLabelCol, bookTitleInputCol);
     bookTitleGroup.appendChild(bookTitleRow);
@@ -73,11 +80,12 @@ const renderAddBookForm = () => {
     bookAuthorRow.className = "row";
 
     const bookAuthorLabelCol = document.createElement('div');
-    bookAuthorLabelCol.className = "col-lg-3 col-md-4 d-flex align-items-center";
+    bookAuthorLabelCol.className = "col-lg-3 col-md-4";
 
     const bookAuthorLabel = document.createElement('label');
     bookAuthorLabel.setAttribute('for', 'bookAuthor');
     bookAuthorLabel.innerText = "Author";
+    bookAuthorLabelCol.appendChild(bookAuthorLabel);
 
     const bookAuthorInputCol = document.createElement('div');
     bookAuthorInputCol.className = "col-lg-9 col-md-8";
@@ -87,10 +95,9 @@ const renderAddBookForm = () => {
     bookAuthorInput.className = "form-control";
     bookAuthorInput.id = "bookAuthor";
     bookAuthorInput.name = "bookAuthor";
-    console.log('Hello');
-
-    bookAuthorLabelCol.appendChild(bookAuthorLabel);
-    bookAuthorInputCol.appendChild(bookAuthorInput);
+    bookAuthorInput.addEventListener('focus', addValidateNote);
+    bookAuthorInput.addEventListener('blur', removeValidateNote);
+    bookAuthorInputCol.append(bookAuthorInput);
 
     bookAuthorRow.append(bookAuthorLabelCol, bookAuthorInputCol);
     bookAuthorGroup.appendChild(bookAuthorRow);
@@ -154,4 +161,27 @@ const renderAddBookForm = () => {
 
     form.append(bookIdGroup, bookTitleGroup, bookAuthorGroup, bookGenreGroup, addBookBtnGroup);
     addBook_box.appendChild(form);
+}
+
+// Add Suggestion Note
+const addValidateNote = (event) => {
+    let note = '';
+
+    const noteSpan = document.createElement('span');
+    noteSpan.className = "d-block mt-1 small text-muted";
+
+    if(event.target.id == 'bookId')
+        note = 'Book-Id must be of 2 Digits';
+    else if(event.target.id == 'bookTitle')
+        note = 'Title should be Greater Than 2 Characters';
+    else if(event.target.id == 'bookAuthor')
+        note = 'Author should be Greater Than 2 Characters';
+
+    noteSpan.innerText = note;
+    event.target.parentElement.appendChild(noteSpan);
+}
+
+// Remove Suggestion Note
+const removeValidateNote = (event) => {
+    event.target.parentElement.removeChild(document.querySelector(`#${event.target.id} + span`));
 }

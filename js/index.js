@@ -72,7 +72,7 @@ const addBook = () => {
 
     const displayBook = new Display();
 
-    if (book_id == '' || book_title.length<2 || book_author.length<2 || book_genre == undefined) {
+    if (book_id.length<4 || book_title.length<3 || book_author.length<3 || book_genre == undefined) {
         displayBook.showStatus("Warning", "Empty/Wrong Value", "#fff3cd");
         setTimeout(displayBook.removeStatus, 2500);
         return false;
