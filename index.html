@@ -22,7 +22,7 @@
 
 </head>
 
-<body onload="renderAddBookForm()">
+<body onload="renderAddBookForm(); renderStoredBooks()">
     <!-- || Header Start -->
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
@@ -40,11 +40,12 @@
                         aria-label="Search">
                     <button class="btn px-4" type="submit">Search</button>
                 </form>
+                <a href="#" class="clear_list" title="Clear All"><img src="./img/clearAll.png" alt="Clear All" /></a>
             </div>
         </div>
     </nav>
     <!-- || Header End -->
-    
+
 
     <!-- Status Message Dynamically -->
     <aside id="statusMessage">

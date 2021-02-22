@@ -163,6 +163,7 @@ const renderAddBookForm = () => {
     addBook_box.appendChild(form);
 }
 
+
 // Add Suggestion Note
 const addValidateNote = (event) => {
     let note = '';
@@ -181,7 +182,14 @@ const addValidateNote = (event) => {
     event.target.parentElement.appendChild(noteSpan);
 }
 
+
 // Remove Suggestion Note
 const removeValidateNote = (event) => {
     event.target.parentElement.removeChild(document.querySelector(`#${event.target.id} + span`));
 }
+
+// Call when user click the Clear All Button
+document.querySelector('.clear_list').addEventListener('click', () => {
+    localStorage.setItem('booklist', JSON.stringify([]));
+    location.reload();
+});

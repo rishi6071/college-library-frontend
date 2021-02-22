@@ -91,6 +91,19 @@
   margin-top: -10px;
 }
 
+.clear_list img {
+  width: 30px;
+  height: auto;
+  margin-top: -3.5px;
+  margin-left: 20px;
+}
+
+@media screen and (max-width: 992px) {
+  .clear_list img {
+    margin-top: 13px;
+  }
+}
+
 /**** Toast Message */
 .toast_box {
   position: fixed;

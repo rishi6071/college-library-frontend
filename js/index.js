@@ -1,3 +1,19 @@
+// Array for Storing Book Objects
+let booklist = [];
+
+// Rendering Stored Library Book onload
+const renderStoredBooks = () => {
+    let display = new Display();
+    
+    if(localStorage.getItem('booklist') == null)
+        localStorage.setItem('booklist', JSON.stringify([]));
+
+    booklist = JSON.parse(localStorage.getItem('booklist'));
+    booklist.forEach((book, index, booklist) => {
+        display.add(book);
+    });
+}
+
 // Template for a Book
 function Book(id, title, author, genre) {
     this.id = id;
@@ -5,7 +21,6 @@ function Book(id, title, author, genre) {
     this.author = author;
     this.genre = genre;
 }
-
 
 // Display Book Object Constructor
 function Display() {
@@ -71,8 +86,7 @@ const addBook = () => {
     }
 
     const displayBook = new Display();
-
-    if (book_id.length<4 || book_title.length<3 || book_author.length<3 || book_genre == undefined) {
+    if (book_id.length<4 || book_id.length>4 || book_title.length<3 || book_author.length<3 || book_genre == undefined) {
         displayBook.showStatus("Warning", "Empty/Wrong Value", "#fff3cd");
         setTimeout(displayBook.removeStatus, 2500);
         return false;
@@ -83,7 +97,9 @@ const addBook = () => {
     }
 
     const book = new Book(book_id, book_title, book_author, book_genre);
-    console.log(displayBook);
+    booklist.push(book);
+    localStorage.setItem('booklist', JSON.stringify(booklist));
+    console.log(JSON.parse(localStorage.booklist));
 
     displayBook.add(book);
     displayBook.clear();
