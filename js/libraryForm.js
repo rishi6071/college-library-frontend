@@ -32,6 +32,7 @@ const renderAddBookForm = () => {
     bookIdInput.className = "form-control";
     bookIdInput.id = "bookId";
     bookIdInput.name = "bookId";
+    bookIdInput.min = "0";
     bookIdInput.minLength = 4;
     bookIdInput.maxLength = 4;
     bookIdInput.placeholder = "4-Digit Book ID...";
